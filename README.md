@@ -6,7 +6,7 @@ Această documentație detaliază arhitectura și procesele sistemului de manage
 
 ## Documentație
 
-0. **[Plan Inițial de Funcționalități](00_feature_plan_initial.md)**
+0. **[Plan Inițial](00_feature_plan_initial.md)**
 
 1. **[Arhitectura Sistem](01-arhitectura-sistem.md)**
 
