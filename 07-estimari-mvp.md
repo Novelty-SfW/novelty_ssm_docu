@@ -15,8 +15,7 @@ Asumări MVP:
 - Semnare documente: doar Self Sign (plasare zonă semnătură + generare PDF semnat local/pe server).
 - Template DOCX cu parametri și tabele (merge fields), fără SDK avansat.
 - Stocare primară: AWS S3 prin StorageController (put/get/delete cu URL-uri presemnate), metadate în DB; arhivare în Google Drive (conectare cont per SSM-ist și politici de arhivare) inclusă în MVP.
-- Minim de tracking pentru teste: scor, pass/fail, timestamps (nu stocăm răspunsurile brute).
-- Inspector view read-only minimal inclus: acces prin link tokenizat cu expirare la setul de documente pregătite de SSM-ist.
+- Inspector view read-only inclus: acces prin link tokenizat cu expirare la setul de documente pregătite de SSM-ist.
 
 Out-of-scope în MVP:
 - Subscription/Payments, QES/semnături avansate, Landing/Blog, rapoarte avansate și orice integrare enterprise.
@@ -48,7 +47,7 @@ Subtotal Pachet Core (BE): 550h
  - Design System + Component Library (buttons, inputs, forms, modal, table, tree, pagination): 60h
  - Routing shell, protected routes, RBAC guards, role-based menu scaffolding: 24h
  - API client (fetch wrapper, interceptors, error normalization, retry) + typing/models: 22h
- - State management setup (store, query cache, session): 16h
+ - State management setup : 16h
  - Layouts (app frame, sidebar/header), responsive grid: 16h
  - Form toolkit (validation schemas, form builder helpers): 10h
  - File/PDF viewer și generic signature overlay component: 16h
@@ -67,20 +66,23 @@ Subtotal Pachet Core (FE – Shared): 200h
  - Auth pages (UI & flows – login/register/forgot) – peste routing/RBAC din FE Core: 10h
  - Dashboard SSM minimalist (stare pachete, acțiuni rapide): 14h
  - Companii: listă + detalii: 14h
- - Organigramă: editor + import din Excel + validări UI: 52h
  - Angajați: listare, editare date, invitații (flow UI): 28h
- - Builder pachete (training + test + documente) – creare/assign: 54h
+ - Organigramă: editor + import din Excel + validări UI: 52h
+ - Builder pachete (training + test + documente) – bundle: 16h
+ - Training Creation UI (creare ): 16h
  - Training viewer (navigare pagini, progress, materiale): 28h
+ - Test Creation UI (Xlsx Import for MVP) : 8h
  - Test taking UI (sequențial/listă, submit, afișare rezultat): 28h
- - Document signing UI (preview PDF + plasare semnătură + submit) – peste signature overlay din FE Core: 22h
+ - Document Template Config UI : 24h
+ - Document signing UI (preview PDF + plasare semnătură + submit) : 22h
  - Document library (listare, filtre, download/ștergere soft): 24h
  - Setări arhivare Google Drive: conectare cont, on/off arhivare: 14h
  - Inspector view UI (read-only): afișare set documente accesibile prin link, acțiuni limitate (vizualizare/descărcare dacă e permis), mesaje expirare/link invalid: 22h
- - Panou notificări/to-do simplu: 10h
- - Vederi rapoarte de bază (finalizări, pass/fail, status documente): 20h
+ - Panou notificări simplu: 10h
+ - Vederi rapoarte de bază (finalizări, status documente): 20h
 
-Subtotal Pachet Client (FE – User & SSM): 340h
-Nota: FE total rămâne 540h = 200h (FE – Shared) + 340h (FE – User & SSM)
+Subtotal Pachet Client (FE – User & SSM): 350h
+Nota: FE total rămâne 540h = 200h (FE – Shared) + 350h (FE – User & SSM)
 
 ---
 
@@ -97,9 +99,9 @@ Subtotal DevOps/QA: 120h
 ## Total estimat MVP
  - Pachet Core (BE): 550h
  - Pachet Core (FE – Shared): 200h
- - Pachet Client (FE – User & SSM): 340h
+ - Pachet Client (FE – User & SSM): 350h
  - DevOps/QA: 120h
- - Total: 1,210h
+ - Total: 1,220h
 
 Observații:
 - MVP exclude plățile, QES și multi-tenant; complexitatea scade față de platforma finală.
@@ -111,7 +113,6 @@ Criterii de acceptare MVP (rezumat):
 - Training viewer + Test runner
 - Generare document din template (parametri+tabele) + Self Sign + PDF rezultat stocat în S3, vizibil în bibliotecă; copie sincronizată în Google Drive conform politicilor de arhivare.
 - Notificări de bază (invitații, asignări, remindere simple) și rapoarte de bază (finalizări, status documente).
-- Audit minimal pentru acțiuni critice.
  - SSM-istul poate pregăti un set de documente pentru inspecție și genera un link securizat (token + expirare); inspectorul poate accesa în mod read-only și, dacă politicile permit, descărca documentele; evenimentele de acces sunt jurnalizate minimal.
 
 ---
@@ -124,20 +125,19 @@ Asumare: livrăm incremental astfel încât după ~3 luni să existe un produs p
 - Core minim operabil (BE): Auth/RBAC, model date, invitații + emailuri, training + test (scoring), generare DOCX→PDF, Self-sign, stocare S3, audit minimal.
 - FE Core (Shared) fundație: routing/RBAC, API client, design system + layouts de bază.
 - FE Client: Auth (pagini), dashboard, companii/angajați, import organigramă din Excel, builder pachete, training/test runner, document signing, library basic.
-- DevOps/Securitate de bază: CI/CD simplu, CORS/rate-limit/validări input.
-Rezultat: produs pilot utilizabil pentru 1–2 companii (creare pachete, invitații, training/test, semnare documente cu stocare sigură).
+- DevOps/Securitate de bază: CI/CD simplu, validări input.
+- Rezultat: produs pilot utilizabil pentru 1–2 companii (creare pachete, invitații, training/test, semnare documente cu stocare sigură).
 
 ### Milestone 2 — Luna 4: Conformitate operațională extinsă
 - Arhivare Google Drive + setări UI; Inspector view read-only cu link tokenizat și audit acces.
 - Îmbunătățiri UI/UX: editor organigramă, library cu filtre/soft delete, panou notificări; rapoarte de bază.
 - Calitate: bugfixing targetat și îmbunătățiri necesare din pilot.
-Rezultat: flux MVP acoperit end-to-end, pregătit pentru mai multe companii și utilizatori.
+- Rezultat: flux MVP acoperit end-to-end, pregătit pentru mai multe companii și utilizatori.
 
 ### Milestone 3 — Luna 5: MVP complet și stabilizare
-- Observabilitate și backup/restore (minim); revizuire RBAC și audit trail.
 - Optimizări performanță/UX; documentație și onboarding.
-- Calitate: regresie, bugfixing final.
-Rezultat: MVP stabil, testat și pregătit pentru producție.
+- Calitate: teste regresie, bugfixing final.
+- Rezultat: MVP stabil, testat și pregătit pentru producție.
 
 ---
 

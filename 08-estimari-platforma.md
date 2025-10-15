@@ -17,7 +17,7 @@ Scop: definim extensiile necesare transformării produsului MVP (single SSM-ist)
 ---
 
 ## Reutilizare din MVP (NU se mai estimează)
-Acoperit deja (1,210h): Auth & RBAC minim, CRUD companii & organigramă (import Excel), invitații, pachete de bază (training+test+doc), training viewer, test runner (scoring), template & generare simplă (parametri+tabele), storage S3 + arhivare GDrive, self-sign, notificări de bază, rapoarte de bază, inspector link read-only, audit minimal, CI/CD simplu, teste E2E critice inițiale, securitate de bază.
+Acoperit deja (1,220h): Auth & RBAC minim, CRUD companii & organigramă (import Excel), invitații, pachete de bază (training+test+doc), training viewer, test runner (scoring), template & generare simplă (parametri+tabele), storage S3 + arhivare GDrive, self-sign, notificări de bază, rapoarte de bază, inspector link read-only, audit minimal, CI/CD simplu, teste E2E critice inițiale, securitate de bază.
 
 ---
 
@@ -35,14 +35,14 @@ Obiectiv: multi-tenancy robust, lifecycle document avansat, motor template extin
 
 | Componentă | Descriere | Estimare (h) |
 |------------|-----------|---------------|
-| Multi-Tenancy Layer | 85 |
-| Platform Owner Tools | 30 |
-| Document Versioning & Retention | 90 |
+| Multi-Tenancy Layer | | 85 |
+| Platform Owner Tools | | 30 |
+| Document Versioning & Retention | | 90 |
 | Advanced Template Engine | Condiționale, bucle nested, imagini, secțiuni dinamice | 150 |
 | Notifications Scheduler + SMS | Chain reminders, ferestre orare, gateway SMS | 75 |
-| Payments (Stripe) Backend | 85 |
-| QES Integration | Integrare furnizor | 180 |
-| S3 multi‑region & failover (add‑on peste MVP) | 55 |
+| Payments (Stripe) Backend | | 85 |
+| QES Integration | Integrare furnizor   | 180 |
+| S3 multi‑region & failover (add‑on peste MVP) | | 55 |
 | Site Public Backend Support | Endpoint content (blog/posts, pricing static) | 25 |
 | Security Hardening extins | Rate limit per tenant, WAF/CDN , secret rotation | 40 |
 | Observabilitate minimă | Log agregat structurat + metrici bază (latency, error rate) | 30 |
@@ -91,13 +91,12 @@ Subtotal Site Public: 110h
 ## 5. DevOps / QA / Securitate Extins
 | Componentă | Descriere | Estimare (h) |
 |------------|-----------|---------------|
-| Multi-tenant, versioning, payments, QES, SMS | 90 |
-| Backup & DR formal | Snapshots, restore drills, rotație chei, runbooks | 45 |
-| Performance & Load | Profiling, caching, concurrency test | 40 |
-| Compliance & Security review QES/Payments | Politici chei, rotație, checklist audit | 25 |
+| Multi-tenant, versioning, payments, QES, SMS | Testare | 90 |
+| Backup & DR setup | Snapshots, restore drills, rotație chei, runbooks | 45 |
+| Performance & Load tests| Profiling, caching, concurrency test | 40 |
 | Documentation | User Manual, Platform Owner Manual, Other User tutorials | 80 |
 
-Subtotal DevOps/QA: 280h
+Subtotal DevOps/QA: 255h
 
 ---
 
@@ -106,9 +105,9 @@ Subtotal DevOps/QA: 280h
 - FE Core Shared: 100h
 - FE Business: 195h
 - Site Public: 110h
-- DevOps/QA: 280h
+- DevOps/QA: 255h
 
-Total (bază): 1,570h
+Total (bază): 1,545h
 
 ---
 
@@ -122,21 +121,21 @@ Ipoteză: start fază Platformă 01 Jun 2026, imediat după finalul MVP (31 May 
 - Observabilitate minimă + security hardening inițial
 - Site Public variantă landing/pricing skeleton
 - Advanced Template Engine 
-Rezultat: onboarding primii SSM-iști plătitori (fără QES încă).
+- Rezultat: onboarding primii SSM-iști plătitori (fără QES încă).
 
 ### Milestone 2 — 1.5 luni (Sep 2026 – Mid Oct 2026): Document Lifecycle & Semnătură Calificată
-- Document Versioning & Retention
+- Document Versioning 
 - QES integrare completă + UI
 - Site Public complet (blog, SEO/OG, sitemap/robots, contact + newsletter, analytics + consent, accesibilitate & performance) + S3 replică/failover
 - Notifications chain + SMS ferestre orare
-Rezultat: ofertă diferențiatoare conformitate & semnare avansată.
+- Rezultat: ofertă diferențiatoare conformitate & semnare avansată.
 
 ### Milestone 3 — 1.5 luni (Mid Oct 2026 – Nov 2026): Stabilizare & Reziliență
 - SLA & Queue hardening, Performance tests
-- DR & Backup drill, secret rotation
+- DR & Backup setup
 - Optimizări UX template/versioning
-- Hardening final securitate & metrici p95 stabile
-Rezultat: platformă pregătită pentru scalare controlată (10+ SSM-iști) cu QES și plăți stabile.
+- Hardening final securitate 
+- Rezultat: platformă pregătită pentru scalare controlată (10+ SSM-iști) cu QES și plăți stabile.
 
 ---
 
