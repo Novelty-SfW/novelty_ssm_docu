@@ -19,11 +19,11 @@ Asumări MVP:
 - Inspector view read-only minimal inclus: acces prin link tokenizat cu expirare la setul de documente pregătite de SSM-ist.
 
 Out-of-scope în MVP:
-- Subscription/Payments, QES/semnături avansate, Inspector portal avansat, Landing/Blog, rapoarte avansate și orice integrare enterprise.
+- Subscription/Payments, QES/semnături avansate, Landing/Blog, rapoarte avansate și orice integrare enterprise.
 
 ---
 
-## Pachet Core (servicii comune, backend, modele, integrare storage)
+## Pachet Core (BE) (servicii comune, backend, modele, integrare storage)
 
  - Autentificare + RBAC (Supabase Auth, roluri: Admin SSM, Manager, Angajat), guards API, politici minime de permisiuni: 50h
  - Model de date și migrații (utilizatori, companii, organizații, invitații, traininguri, teste, rezultate, template-uri, documente, pachete): 30h
@@ -43,24 +43,44 @@ Subtotal Pachet Core (BE): 550h
 
 ---
 
-## Pachet Client (Web SPA – UI pentru SSM, Manager, Angajat)
+## Pachet Core (FE – Shared)
 
- - Auth pages + protected routes + meniu în funcție de rol: 30h
- - Dashboard SSM minimalist (stare pachete, acțiuni rapide): 20h
- - Companii: listă + detalii: 20h
- - Organigramă: editor + import din Excel + validări UI: 80h
- - Angajați: listare, editare date, invitații (flow UI): 40h
- - Builder pachete (training + test + documente) – creare/assign: 80h
- - Training viewer (navigare pagini, progress, materiale): 40h
- - Test taking UI (sequențial/listă, submit, afișare rezultat): 40h
- - Document signing UI (preview PDF + plasare semnătură + submit): 40h
- - Document library (listare, filtre, download/ștergere soft): 40h
- - Setări arhivare Google Drive: conectare cont, on/off arhivare: 20h
- - Inspector view UI (read-only): afișare set documente accesibile prin link, acțiuni limitate (vizualizare/descărcare dacă e permis), mesaje expirare/link invalid: 40h
- - Panou notificări/to-do simplu: 20h
- - Vederi rapoarte de bază (finalizări, pass/fail, status documente): 30h
+ - Design System + Component Library (buttons, inputs, forms, modal, table, tree, pagination): 60h
+ - Routing shell, protected routes, RBAC guards, role-based menu scaffolding: 24h
+ - API client (fetch wrapper, interceptors, error normalization, retry) + typing/models: 22h
+ - State management setup (store, query cache, session): 16h
+ - Layouts (app frame, sidebar/header), responsive grid: 16h
+ - Form toolkit (validation schemas, form builder helpers): 10h
+ - File/PDF viewer și generic signature overlay component: 16h
+ - Upload widget cu flux S3 presigned URLs: 8h
+ - Notifications/toast/confirm dialog infrastructure: 6h
+ - Theming (light/dark): 8h
+ - Error boundary + empty/loading skeletons: 8h
+ - Telemetry hook (basic analytics events): 6h
 
-Subtotal Pachet Client (FE): 540h
+Subtotal Pachet Core (FE – Shared): 200h
+
+---
+
+## Pachet Client (FE – User & SSM)
+
+ - Auth pages (UI & flows – login/register/forgot) – peste routing/RBAC din FE Core: 10h
+ - Dashboard SSM minimalist (stare pachete, acțiuni rapide): 14h
+ - Companii: listă + detalii: 14h
+ - Organigramă: editor + import din Excel + validări UI: 52h
+ - Angajați: listare, editare date, invitații (flow UI): 28h
+ - Builder pachete (training + test + documente) – creare/assign: 54h
+ - Training viewer (navigare pagini, progress, materiale): 28h
+ - Test taking UI (sequențial/listă, submit, afișare rezultat): 28h
+ - Document signing UI (preview PDF + plasare semnătură + submit) – peste signature overlay din FE Core: 22h
+ - Document library (listare, filtre, download/ștergere soft): 24h
+ - Setări arhivare Google Drive: conectare cont, on/off arhivare: 14h
+ - Inspector view UI (read-only): afișare set documente accesibile prin link, acțiuni limitate (vizualizare/descărcare dacă e permis), mesaje expirare/link invalid: 22h
+ - Panou notificări/to-do simplu: 10h
+ - Vederi rapoarte de bază (finalizări, pass/fail, status documente): 20h
+
+Subtotal Pachet Client (FE – User & SSM): 340h
+Nota: FE total rămâne 540h = 200h (FE – Shared) + 340h (FE – User & SSM)
 
 ---
 
@@ -75,66 +95,67 @@ Subtotal DevOps/QA: 120h
 ---
 
 ## Total estimat MVP
- - Pachet Core: 550h
- - Pachet Client: 540h
+ - Pachet Core (BE): 550h
+ - Pachet Core (FE – Shared): 200h
+ - Pachet Client (FE – User & SSM): 340h
  - DevOps/QA: 120h
  - Total: 1,210h
 
 Observații:
 - MVP exclude plățile, QES și multi-tenant; complexitatea scade față de platforma finală.
-- Inspector view read-only este inclus în MVP; varianta avansată de portal inspector rămâne out-of-scope.
 
 Criterii de acceptare MVP (rezumat):
 - RBAC minim funcțional (Admin SSM, Manager, Angajat); acces segregat corect.
 - CRUD companii + organigramă (import Excel) + invitații angajați funcționale.
 - Builder pachete: se pot crea pachete ce conțin training + test + document; se pot asigna la angajați.
-- Training viewer + Test runner cu evaluare și salvare rezultat minimal.
+- Training viewer + Test runner
 - Generare document din template (parametri+tabele) + Self Sign + PDF rezultat stocat în S3, vizibil în bibliotecă; copie sincronizată în Google Drive conform politicilor de arhivare.
-- Notificări de bază (invitații, asignări, remindere simple) și rapoarte de bază (pass/fail, finalizări, status documente).
+- Notificări de bază (invitații, asignări, remindere simple) și rapoarte de bază (finalizări, status documente).
 - Audit minimal pentru acțiuni critice.
  - SSM-istul poate pregăti un set de documente pentru inspecție și genera un link securizat (token + expirare); inspectorul poate accesa în mod read-only și, dacă politicile permit, descărca documentele; evenimentele de acces sunt jurnalizate minimal.
 
 ---
 
-## Timeline 6 luni și Milestone-uri (bazat pe estimarea MVP)
+## Timeline 5 luni și Milestone-uri (bazat pe estimarea MVP)
 
-Asumare: livrăm incremental astfel încât după ~3 luni să existe un produs pilot utilizabil în producție limitată (onboarding 1–2 companii), apoi extindem capabilități și stabilizăm până la 6 luni.
+Asumare: livrăm incremental astfel încât după ~3 luni să existe un produs pilot utilizabil în producție limitată (onboarding 1–2 companii), apoi livrăm câte un milestone lunar până la 5 luni (stabilizare și completare criterii MVP).
 
 ### Milestone 1 — Luna 3: Pilot utilizabil (Go-Live limitat)
-- Core minim operabil: Auth/RBAC, model date, invitații + emailuri, training + test (scoring), generare DOCX→PDF, Self-sign, stocare S3, audit minimal.
-- FE minim pe flux: Auth, dashboard, companii/angajați, import organigramă din Excel, builder pachete, training/test runner, document signing, library basic.
+- Core minim operabil (BE): Auth/RBAC, model date, invitații + emailuri, training + test (scoring), generare DOCX→PDF, Self-sign, stocare S3, audit minimal.
+- FE Core (Shared) fundație: routing/RBAC, API client, design system + layouts de bază.
+- FE Client: Auth (pagini), dashboard, companii/angajați, import organigramă din Excel, builder pachete, training/test runner, document signing, library basic.
 - DevOps/Securitate de bază: CI/CD simplu, CORS/rate-limit/validări input.
 Rezultat: produs pilot utilizabil pentru 1–2 companii (creare pachete, invitații, training/test, semnare documente cu stocare sigură).
 
-### Milestone 2 — Luna 4.5: Conformitate operațională extinsă
+### Milestone 2 — Luna 4: Conformitate operațională extinsă
 - Arhivare Google Drive + setări UI; Inspector view read-only cu link tokenizat și audit acces.
 - Îmbunătățiri UI/UX: editor organigramă, library cu filtre/soft delete, panou notificări; rapoarte de bază.
-- Securitate/Calitate: hardening, începere teste E2E și remedieri din pilot.
+- Calitate: bugfixing targetat și îmbunătățiri necesare din pilot.
 Rezultat: flux MVP acoperit end-to-end, pregătit pentru mai multe companii și utilizatori.
 
-### Milestone 3 — Luna 6: MVP complet și stabilizare
-- Finalizare criterii de acceptare MVP; E2E extinse + regresie.
-- Observabilitate și backup/restore; revizuire RBAC și audit trail.
+### Milestone 3 — Luna 5: MVP complet și stabilizare
+- Observabilitate și backup/restore (minim); revizuire RBAC și audit trail.
 - Optimizări performanță/UX; documentație și onboarding.
+- Calitate: regresie, bugfixing final.
 Rezultat: MVP stabil, testat și pregătit pentru producție.
 
 ---
 
-## Diagrama Gantt (Mermaid) — Timeline 6 luni pornind de la 1 ianuarie 2026
+## Diagrama Gantt (Mermaid) — Timeline 5 luni pornind de la 1 ianuarie 2026
 
 ```mermaid
 gantt
-  title MVP Timeline (01 Jan 2026 - 30 Jun 2026)
+  title MVP Timeline (01 Jan 2026 - 31 May 2026)
   dateFormat YYYY-MM-DD
 
   section Ferestre
   M1 (3 luni)      : m1win, 2026-01-01, 90d
-  M2 (1.5 luni)    : m2win, 2026-04-01, 45d
-  M3 (1.5 luni)    : m3win, 2026-05-16, 45d
+  M2 (1 lună)      : m2win, 2026-04-01, 30d
+  M3 (1 lună)      : m3win, 2026-05-01, 31d
 
   section Milestone-uri
   M1 complet       : milestone, m1, 2026-03-31, 0d
-  M2 complet       : milestone, m2, 2026-05-15, 0d
-  M3 complet       : milestone, m3, 2026-06-30, 0d
+  M2 complet       : milestone, m2, 2026-04-30, 0d
+  M3 complet       : milestone, m3, 2026-05-31, 0d
 ```
 
