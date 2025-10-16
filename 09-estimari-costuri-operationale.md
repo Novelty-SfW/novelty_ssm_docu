@@ -84,7 +84,24 @@ Note:
 
 ---
 
-## 4) Rezumat 
+## 4) Exemple Servicii Externe
+- QES
+	- [Namirial](https://www.namirial.ro/) - nu au pret pe site
+	- [Signius](https://signius.eu/) - (min 0.0575€ (1200) - max 0.4€ (10))
+- SMS Provider
+	- [Web2SMS](https://www.web2sms.ro/) - (0.0348€ (500) ->  0.0278€ (25000) per SMS) in functie de volum
+	- [SMSAlert](https://smsalert.mobi/en) - (0.03€ (1000) ->  0.005€ (25000) per SMS) in functie de volum
+- Payment Provider 
+	- [Netopia](https://netopia-payments.com/) - 0.99% Din valoarea tranzactiei - sau negociabil la volum
+	- [Stripe](https://stripe.com/en-ro) - 1 RON + 1.5% Din valoarea tranzactiei 
+	- [EuPlatesc](https://www.euplatesc.ro/) - Nu apare cost pe site
+	- [PayU](https://romania.payu.com/en/) - 0.3 RON + 0.99% Din valoarea tranzactiei 
+- Facturare
+	- [SmartBill](https://www.smartbill.ro/) - Asta sar putea face intern simplificat (?) 
+
+---
+
+## 5) Rezumat 
 - MVP (1 SSM‑ist): ~€6–€48/lună fără opționale; până la ~€60 cu SMS/Arhivare.
 - Platformă (100 SSM‑iști):
 	- Fără SMS/QES: ~€0.12k–€0.52k

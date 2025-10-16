@@ -35,14 +35,14 @@ Obiectiv: multi-tenancy robust, lifecycle document avansat, motor template extin
 
 | Componentă | Descriere | Estimare (h) |
 |------------|-----------|---------------|
-| Multi-Tenancy Layer | | 85 |
-| Platform Owner Tools | | 30 |
-| Document Versioning & Retention | | 90 |
+| Multi-Tenancy Layer | Date SSM-isti separate logic | 85 |
+| Platform Owner Tools | Management Palatofrma | 30 |
+| Document Versioning & Retention | Management usor al Documentelor | 90 |
 | Advanced Template Engine | Condiționale, bucle nested, imagini, secțiuni dinamice | 150 |
 | Notifications Scheduler + SMS | Chain reminders, ferestre orare, gateway SMS | 75 |
-| Payments (Stripe) Backend | | 85 |
+| Payments Backend | Integrare sisteme plata | 85 |
 | QES Integration | Integrare furnizor   | 180 |
-| S3 multi‑region & failover (add‑on peste MVP) | | 55 |
+| S3 multi‑region & failover (add‑on peste MVP) | Back-up Formal | 55 |
 | Site Public Backend Support | Endpoint content (blog/posts, pricing static) | 25 |
 | Security Hardening extins | Rate limit per tenant, WAF/CDN , secret rotation | 40 |
 | Observabilitate minimă | Log agregat structurat + metrici bază (latency, error rate) | 30 |
