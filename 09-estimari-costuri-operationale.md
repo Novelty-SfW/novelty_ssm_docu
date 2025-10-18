@@ -110,3 +110,9 @@ Note:
 	- +SMS+QES: ~€1.22k–€3.72k
 	(mediane aprox.: 0.29k / 0.64k / 2.09k / 2.44k)
 - Principalii consumatori: QES, SMS, DTO video. Optimizați cu CDN, politici de comunicare email‑first, și păstrați în S3 doar documentele curente (arhivare pe GDrive).
+
+
+ToDo:
+Varianta simplificata pentru estimare de dat la Crina.
+Estimare Aplicatie mobil pentru useri.
+Site mutat in MVP.
